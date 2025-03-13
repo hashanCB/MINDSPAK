@@ -1,6 +1,32 @@
+'use client'
 import Head from "next/head";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const calculateTimeLeft = () => {
+    const difference = +new Date("2025-05-20") - +new Date();
+    let timeLeft = {};
+
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+    return timeLeft;
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <Head>
@@ -38,6 +64,11 @@ export default function Home() {
           </p>
         </div>
 
+        {/* Countdown Timer */}
+        <div className="mt-6 text-3xl font-bold text-orange-400 bg-gray-800 px-4 py-2 rounded-lg shadow-lg animate-pulse">
+          Time Left: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+        </div>
+
         {/* Theme and Submission Details */}
         <div className="mt-6">
           <p className="text-lg md:text-xl text-orange-500 font-semibold underline animate-fade-in-left">
@@ -54,7 +85,7 @@ export default function Home() {
 
         {/* Contact Information */}
         <div className="mt-6">
-        
+          <p className="text-sm md:text-base text-white">submissions@agri.rjt.ac.lk</p>
           <p className="text-sm md:text-base text-white">+94 77 376 104 / +94 71 0997 046</p>
           <div className="bg-orange-500 text-white px-4 py-2 rounded-lg inline-block mt-2 shadow-lg transform hover:scale-110 transition duration-300">
             <p className="text-sm md:text-base">SEND YOUR LITERARY WORKS TO</p>
