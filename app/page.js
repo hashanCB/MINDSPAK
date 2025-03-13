@@ -85,7 +85,7 @@ export default function Home() {
 
         {/* Contact Information */}
         <div className="mt-6">
-          <p className="text-sm md:text-base text-white">submissions@agri.rjt.ac.lk</p>
+      
           <p className="text-sm md:text-base text-white">+94 77 376 104 / +94 71 0997 046</p>
           <div className="bg-orange-500 text-white px-4 py-2 rounded-lg inline-block mt-2 shadow-lg transform hover:scale-110 transition duration-300">
             <p className="text-sm md:text-base">SEND YOUR LITERARY WORKS TO</p>
